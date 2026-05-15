@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v4
         with:
           java-version: 1.8
       # 从release.json 读取相关信息
@@ -34,12 +34,12 @@ jobs:
 
       - name: Read description
         id: description
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@v4
         with:
           path: ./src/main/resources/release.info
 
       - name: Cache local Maven repository
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -73,7 +73,7 @@ jobs:
 
       - name: Upload Release Asset
         id: upload-release-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
